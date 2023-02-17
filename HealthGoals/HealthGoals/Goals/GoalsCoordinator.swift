@@ -23,7 +23,8 @@ final class GoalsCoordinator {
 
 extension GoalsCoordinator: GoalsCoordinatorProtocol {
   func createGoalsViewController() -> UIViewController {
-    let view = GoalsViewController(coordinator: GoalsCoordinator())
+    let presenter = GoalsPresenter(networkManager: NetworkManager())
+    let view = GoalsViewController(presenter: presenter, coordinator: GoalsCoordinator())
 
     return view
   }
