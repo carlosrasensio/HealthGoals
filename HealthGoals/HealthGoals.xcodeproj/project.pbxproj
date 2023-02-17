@@ -15,6 +15,7 @@
 		7007FE90299F03E600A1FF84 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE8F299F03E600A1FF84 /* Goal.swift */; };
 		7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */; };
 		7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE94299F046800A1FF84 /* GoalsViewController.swift */; };
+		7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7007FE8F299F03E600A1FF84 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewCell.swift; sourceTree = "<group>"; };
 		7007FE94299F046800A1FF84 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
+		7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		7007FE8D299F03CC00A1FF84 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
+				7007FE96299F049000A1FF84 /* Coordinator */,
 				7007FE91299F042700A1FF84 /* View */,
 				7007FE8E299F03D600A1FF84 /* Model */,
 			);
@@ -95,6 +98,14 @@
 				7007FE94299F046800A1FF84 /* GoalsViewController.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		7007FE96299F049000A1FF84 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */,
+			);
+			name = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
 				7007FE79299F036C00A1FF84 /* SceneDelegate.swift in Sources */,
+				7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */,
 				7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */,
 				7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */,
 			);
