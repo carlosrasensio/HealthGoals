@@ -19,6 +19,9 @@
 		7007FE9D299F066A00A1FF84 /* GoalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE9C299F066A00A1FF84 /* GoalsPresenter.swift */; };
 		7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA0299F08DB00A1FF84 /* NetworkManager.swift */; };
 		7007FEA3299F0CB100A1FF84 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */; };
+		7007FEAA299F185500A1FF84 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA9299F185500A1FF84 /* ProgressViewController.swift */; };
+		7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */; };
+		7007FEAE299F186400A1FF84 /* ProgressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		7007FE9C299F066A00A1FF84 /* GoalsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPresenter.swift; sourceTree = "<group>"; };
 		7007FEA0299F08DB00A1FF84 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		7007FEA9299F185500A1FF84 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenter.swift; sourceTree = "<group>"; };
+		7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 				7007FE84299F036D00A1FF84 /* LaunchScreen.storyboard */,
 				7007FE87299F036D00A1FF84 /* Info.plist */,
 				7007FE8D299F03CC00A1FF84 /* Goals */,
+				7007FEA5299F17F900A1FF84 /* Progress */,
 				7007FE9E299F08C600A1FF84 /* Utils */,
 				7007FE99299F054400A1FF84 /* Resources */,
 			);
@@ -165,6 +172,40 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7007FEA5299F17F900A1FF84 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEA6299F181300A1FF84 /* View */,
+				7007FEA7299F181700A1FF84 /* Presenter */,
+				7007FEA8299F182A00A1FF84 /* Coordinator */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		7007FEA6299F181300A1FF84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEA9299F185500A1FF84 /* ProgressViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7007FEA7299F181700A1FF84 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		7007FEA8299F182A00A1FF84 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -238,11 +279,14 @@
 				7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */,
 				7007FE90299F03E600A1FF84 /* Goal.swift in Sources */,
 				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
+				7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */,
+				7007FEAA299F185500A1FF84 /* ProgressViewController.swift in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
 				7007FE79299F036C00A1FF84 /* SceneDelegate.swift in Sources */,
 				7007FEA3299F0CB100A1FF84 /* UIViewController+Alert.swift in Sources */,
 				7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */,
 				7007FE9D299F066A00A1FF84 /* GoalsPresenter.swift in Sources */,
+				7007FEAE299F186400A1FF84 /* ProgressCoordinator.swift in Sources */,
 				7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */,
 				7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */,
 			);
