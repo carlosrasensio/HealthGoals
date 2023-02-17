@@ -83,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				7007FE8E299F03D600A1FF84 /* Model */,
+				7007FE91299F042700A1FF84 /* View */,
 				7007FE9B299F064D00A1FF84 /* Presenter */,
 				7007FE96299F049000A1FF84 /* Coordinator */,
 			);
@@ -92,7 +93,6 @@
 		7007FE8E299F03D600A1FF84 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7007FE91299F042700A1FF84 /* View */,
 				7007FE8F299F03E600A1FF84 /* Goal.swift */,
 			);
 			path = Model;

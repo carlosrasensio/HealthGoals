@@ -18,15 +18,14 @@ final class GoalsViewController: UIViewController {
   private lazy var tableView = UITableView()
   
   // MARK: Variables
+  private let presenter: GoalsPresenter
   private let coordinator: GoalsCoordinator
-  private var goals = [
-    Goal(id: 10001, goal: "500", description: "Walk 500 steps a day", title: "Easy walk steps", type: "step", reward: Reward(trophy: "bronze_medal", points: "5")),
-    Goal(id: 10002, goal: "1000", description: "Walk 1000 steps a day", title: "Medium walk steps", type: "step", reward: Reward(trophy: "silver_medal", points: "10")),
-    Goal(id: 10003, goal: "6000", description: "Walk 6000 steps a day", title: "Hard walk steps", type: "step", reward: Reward(trophy: "gold_medal", points: "20"))
-  ]
+  
+  private var goals = [Goal]()
   
   // MARK: Initializers
-  init(coordinator: GoalsCoordinator) {
+  init(presenter: GoalsPresenter, coordinator: GoalsCoordinator) {
+    self.presenter = presenter
     self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)
   }
@@ -53,7 +52,8 @@ extension GoalsViewController: GoalsViewControllerProtocol {
   }
   
   func setupInfo() {
-    navigationItem.title = "Goals"
+    navigationItem.title = presenter.title
+    getGoals()
   }
 }
 
@@ -89,13 +89,21 @@ private extension GoalsViewController {
   
   func reloadTableView() {
     DispatchQueue.main.async {
+      self.showActivityIndicator()
       self.tableView.reloadData()
+      self.showActivityIndicator(false)
     }
   }
   
   func showActivityIndicator(_ show: Bool = true) {
     activityIndicator.isHidden = !show
     show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+  }
+  
+  func getGoals() {
+    Task {
+      await presenter.getGoals()
+    }
   }
 }
 
