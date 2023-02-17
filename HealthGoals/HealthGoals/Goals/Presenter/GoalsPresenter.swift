@@ -17,15 +17,18 @@ protocol GoalsPresenterProtocol {
   
   func setViewDelegate(delegate: GoalsPresenterDelegate)
   func getGoals() async
+  func didSelectGoal(_ goal: Goal)
 }
 
 final class GoalsPresenter {
   // MARK: Variables
   private weak var delegate: GoalsPresenterDelegate?
+  private let coordinator: GoalsCoordinatorProtocol
   private let networkManager: NetworkManagerProtocol
     
   // MARK: Initializers
-  init(networkManager: NetworkManagerProtocol) {
+  init(coordinator: GoalsCoordinatorProtocol, networkManager: NetworkManagerProtocol) {
+    self.coordinator = coordinator
     self.networkManager = networkManager
   }
 }
@@ -47,6 +50,10 @@ extension GoalsPresenter: GoalsPresenterProtocol {
       print("\n❌ ERROR: \(error.localizedDescription)")
       delegate?.presentAlert(title: "ERROR", message: error.localizedDescription)
     }
+  }
+  
+  func didSelectGoal(_ goal: Goal) {
+    coordinator.navigateToProgress(for: goal)
   }
 }
 

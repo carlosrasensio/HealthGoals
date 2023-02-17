@@ -11,6 +11,7 @@ import UIKit
 protocol GoalsCoordinatorProtocol: AnyObject {
   func createGoalsViewController() -> UIViewController
   func setSourceView(_ view: UIViewController?)
+  func navigateToProgress(for goal: Goal?)
 }
 
 final class GoalsCoordinator {
@@ -23,8 +24,8 @@ final class GoalsCoordinator {
 
 extension GoalsCoordinator: GoalsCoordinatorProtocol {
   func createGoalsViewController() -> UIViewController {
-    let presenter = GoalsPresenter(networkManager: NetworkManager())
-    let view = GoalsViewController(presenter: presenter, coordinator: GoalsCoordinator())
+    let presenter = GoalsPresenter(coordinator: GoalsCoordinator(), networkManager: NetworkManager())
+    let view = GoalsViewController(presenter: presenter)
 
     return view
   }
@@ -32,5 +33,10 @@ extension GoalsCoordinator: GoalsCoordinatorProtocol {
   func setSourceView(_ view: UIViewController?) {
     guard let view else { return }
     sourceView = view
+  }
+  
+  func navigateToProgress(for goal: Goal?) {
+    let progressView = ProgressCoordinator(goal: goal).viewController
+    sourceView?.navigationController?.pushViewController(progressView, animated: true)
   }
 }

@@ -19,14 +19,12 @@ final class GoalsViewController: UIViewController {
   
   // MARK: Variables
   private let presenter: GoalsPresenterProtocol
-  private let coordinator: GoalsCoordinatorProtocol
   
   private var goals = [Goal]()
   
   // MARK: Initializers
-  init(presenter: GoalsPresenterProtocol, coordinator: GoalsCoordinatorProtocol) {
+  init(presenter: GoalsPresenterProtocol) {
     self.presenter = presenter
-    self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -127,7 +125,7 @@ extension GoalsViewController: UITableViewDataSource {
 
 extension GoalsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    // TODO
+    presenter.didSelectGoal(goals[indexPath.row])
   }
 }
 
