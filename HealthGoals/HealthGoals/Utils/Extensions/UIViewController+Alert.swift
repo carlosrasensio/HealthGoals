@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
   func showAlert(title: String, message : String) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    alert.view.backgroundColor = .red
+    alert.view.backgroundColor = .systemCyan
     alert.view.alpha = 0.5
     alert.view.layer.cornerRadius = 15
     self.present(alert, animated: true)
