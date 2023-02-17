@@ -23,8 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
 
   }
-
+  
   func sceneDidEnterBackground(_ scene: UIScene) {
+    /// This way, Core Data will save the data each time the user leaves the app in the background
     (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
   }
 }

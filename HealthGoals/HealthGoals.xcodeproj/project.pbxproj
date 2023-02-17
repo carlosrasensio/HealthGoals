@@ -22,6 +22,7 @@
 		7007FEAA299F185500A1FF84 /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA9299F185500A1FF84 /* ProgressViewController.swift */; };
 		7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */; };
 		7007FEAE299F186400A1FF84 /* ProgressCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */; };
+		7007FEB1299F37E000A1FF84 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		7007FEA9299F185500A1FF84 /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenter.swift; sourceTree = "<group>"; };
 		7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCoordinator.swift; sourceTree = "<group>"; };
+		7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				7007FE82299F036D00A1FF84 /* Assets.xcassets */,
-				7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -150,6 +151,7 @@
 		7007FE9E299F08C600A1FF84 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7007FEAF299F37D500A1FF84 /* CoreData */,
 				7007FEA4299F11F500A1FF84 /* Extensions */,
 				7007FE9F299F08D000A1FF84 /* Network */,
 			);
@@ -204,6 +206,15 @@
 				7007FEAD299F186400A1FF84 /* ProgressCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		7007FEAF299F37D500A1FF84 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */,
+				7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,6 +290,7 @@
 				7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */,
 				7007FE90299F03E600A1FF84 /* Goal.swift in Sources */,
 				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
+				7007FEB1299F37E000A1FF84 /* CoreDataManager.swift in Sources */,
 				7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */,
 				7007FEAA299F185500A1FF84 /* ProgressViewController.swift in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
