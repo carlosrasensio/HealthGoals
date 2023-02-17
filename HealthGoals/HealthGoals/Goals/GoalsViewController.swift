@@ -53,6 +53,7 @@ extension GoalsViewController: GoalsViewControllerProtocol {
   
   func setupInfo() {
     navigationItem.title = presenter.title
+    presenter.setViewDelegate(delegate: self)
     getGoals()
   }
 }
@@ -127,5 +128,20 @@ extension GoalsViewController: UITableViewDataSource {
 extension GoalsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     // TODO
+  }
+}
+
+// MARK: - GoalsPresenterDelegate
+
+extension GoalsViewController: GoalsPresenterDelegate {
+  func presentGoals(_ goals: [Goal]) {
+    self.goals = goals
+    reloadTableView()
+  }
+  
+  func presentAlert(title: String, message: String) {
+    DispatchQueue.main.async {
+      self.showAlert(title: title, message: message)
+    }
   }
 }
