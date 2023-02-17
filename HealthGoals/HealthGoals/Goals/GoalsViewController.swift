@@ -13,7 +13,7 @@ protocol GoalsViewControllerProtocol {
 }
 
 final class GoalsViewController: UIViewController {
-  //MARK: Objects
+  // MARK: Objects
   private lazy var activityIndicator = UIActivityIndicatorView()
   private lazy var tableView = UITableView()
   
@@ -52,7 +52,7 @@ extension GoalsViewController: GoalsViewControllerProtocol {
   }
   
   func setupInfo() {
-    navigationItem.title = presenter.title
+    navigationItem.title = presenter.navigationItemTitle
     presenter.setViewDelegate(delegate: self)
     getGoals()
   }

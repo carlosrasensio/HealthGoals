@@ -13,7 +13,7 @@ protocol GoalsPresenterDelegate: AnyObject {
 }
 
 protocol GoalsPresenterProtocol {
-  var title: String { get }
+  var navigationItemTitle: String { get }
   
   func setViewDelegate(delegate: GoalsPresenterDelegate)
   func getGoals() async
@@ -33,7 +33,7 @@ final class GoalsPresenter {
 // MARK: - GoalsPresenterProtocol
 
 extension GoalsPresenter: GoalsPresenterProtocol {
-  var title: String { "Goals" }
+  var navigationItemTitle: String { "Goals" }
   
   public func setViewDelegate(delegate: GoalsPresenterDelegate) {
     self.delegate = delegate
