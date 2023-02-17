@@ -95,7 +95,7 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
       titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 12)
+      titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
@@ -110,7 +110,7 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
       descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 12)
+      descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
@@ -123,8 +123,8 @@ private extension ProgressViewController {
     view.addSubview(goalLabel)
     NSLayoutConstraint.activate([
       goalLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
-      goalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      goalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+      goalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+      goalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
@@ -138,7 +138,7 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       typeLabel.topAnchor.constraint(equalTo: goalLabel.bottomAnchor, constant: 12),
       typeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      typeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 12)
+      typeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
@@ -152,7 +152,7 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       trophyLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 12),
       trophyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      trophyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 12)
+      trophyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
@@ -166,7 +166,7 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       pointsLabel.topAnchor.constraint(equalTo: trophyLabel.bottomAnchor, constant: 12),
       pointsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      pointsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 12)
+      pointsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
