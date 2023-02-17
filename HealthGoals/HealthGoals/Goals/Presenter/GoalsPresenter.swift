@@ -17,6 +17,7 @@ protocol GoalsPresenterProtocol {
   
   func setViewDelegate(delegate: GoalsPresenterDelegate)
   func getGoals() async
+  func saveGoals(_ goals: [Goal])
   func didSelectGoal(_ goal: Goal)
 }
 
@@ -45,12 +46,21 @@ extension GoalsPresenter: GoalsPresenterProtocol {
   }
   
   func getGoals() async {
+    var goals = [Goal]()
     do {
-      let goals = try await networkManager.getGoals()
-      delegate?.presentGoals(goals)
+      goals = try await networkManager.getGoals()
     } catch {
       print("\n❌ ERROR: \(error.localizedDescription)")
       delegate?.presentAlert(title: "ERROR", message: error.localizedDescription)
+      goals = coreDataManager.getCoreDataGoals()
+    }
+    
+    delegate?.presentGoals(goals)
+  }
+  
+  func saveGoals(_ goals: [Goal]) {
+    goals.forEach {
+      coreDataManager.saveGoal($0)
     }
   }
   

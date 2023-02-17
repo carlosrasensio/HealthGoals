@@ -134,6 +134,7 @@ extension GoalsViewController: UITableViewDelegate {
 extension GoalsViewController: GoalsPresenterDelegate {
   func presentGoals(_ goals: [Goal]) {
     self.goals = goals
+    presenter.saveGoals(goals)
     reloadTableView()
   }
   
