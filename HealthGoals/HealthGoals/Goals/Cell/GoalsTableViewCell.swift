@@ -40,7 +40,7 @@ extension GoalsTableViewCell: GoalsTableViewCellProtocol {
   static var identifier: String { String(describing: self) }
   
   func setupUI() {
-    setupContentView()
+    setupContainerView()
     setupTitleLabel()
   }
   
@@ -52,7 +52,7 @@ extension GoalsTableViewCell: GoalsTableViewCellProtocol {
 // MARK: - Private methods
 
 private extension GoalsTableViewCell {
-  func setupContentView() {
+  func setupContainerView() {
     containerView.backgroundColor = .systemCyan
     containerView.layer.cornerRadius = 6
     containerView.layer.shadowOffset = .zero
