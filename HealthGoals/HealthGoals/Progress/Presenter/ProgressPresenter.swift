@@ -19,11 +19,13 @@ protocol ProgressPresenterProtocol {
 
 final class ProgressPresenter {
   // MARK: Variables
+  private let coreDataManager: CoreDataManagerProtocol
   var goalProgress: Goal?
   
   // MARK: Initializer
-  init(goal: Goal?) {
+  init(goal: Goal? = nil, coreDataManager: CoreDataManagerProtocol) {
     goalProgress = goal
+    self.coreDataManager = coreDataManager
   }
 }
 

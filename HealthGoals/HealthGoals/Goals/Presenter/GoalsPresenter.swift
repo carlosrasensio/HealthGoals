@@ -25,11 +25,13 @@ final class GoalsPresenter {
   private weak var delegate: GoalsPresenterDelegate?
   private let coordinator: GoalsCoordinatorProtocol
   private let networkManager: NetworkManagerProtocol
+  private let coreDataManager: CoreDataManagerProtocol
     
   // MARK: Initializers
-  init(coordinator: GoalsCoordinatorProtocol, networkManager: NetworkManagerProtocol) {
+  init(coordinator: GoalsCoordinatorProtocol, networkManager: NetworkManagerProtocol, coreDataManager: CoreDataManagerProtocol) {
     self.coordinator = coordinator
     self.networkManager = networkManager
+    self.coreDataManager = coreDataManager
   }
 }
 

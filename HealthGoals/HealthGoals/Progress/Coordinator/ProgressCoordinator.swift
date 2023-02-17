@@ -30,7 +30,7 @@ final class ProgressCoordinator {
 
 extension ProgressCoordinator: ProgressCoordinatorProtocol {
   func createProgressViewController() -> UIViewController {
-    let presenter = ProgressPresenter(goal: goal)
+    let presenter = ProgressPresenter(goal: goal, coreDataManager: CoreDataManager())
     let view = ProgressViewController(presenter: presenter, coordinator: ProgressCoordinator())
     
     return view
