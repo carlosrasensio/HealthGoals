@@ -18,13 +18,13 @@ final class GoalsViewController: UIViewController {
   private lazy var tableView = UITableView()
   
   // MARK: Variables
-  private let presenter: GoalsPresenter
-  private let coordinator: GoalsCoordinator
+  private let presenter: GoalsPresenterProtocol
+  private let coordinator: GoalsCoordinatorProtocol
   
   private var goals = [Goal]()
   
   // MARK: Initializers
-  init(presenter: GoalsPresenter, coordinator: GoalsCoordinator) {
+  init(presenter: GoalsPresenterProtocol, coordinator: GoalsCoordinatorProtocol) {
     self.presenter = presenter
     self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)

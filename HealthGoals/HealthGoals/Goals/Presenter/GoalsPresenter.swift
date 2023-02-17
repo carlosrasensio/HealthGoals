@@ -15,25 +15,18 @@ protocol GoalsPresenterDelegate: AnyObject {
 protocol GoalsPresenterProtocol {
   var title: String { get }
   
+  func setViewDelegate(delegate: GoalsPresenterDelegate)
   func getGoals() async
 }
 
 final class GoalsPresenter {
   // MARK: Variables
   private weak var delegate: GoalsPresenterDelegate?
-  private let networkManager: NetworkManager
+  private let networkManager: NetworkManagerProtocol
     
   // MARK: Initializers
-  init(networkManager: NetworkManager) {
+  init(networkManager: NetworkManagerProtocol) {
     self.networkManager = networkManager
-  }
-}
-
-// MARK: - Delegate configuration
-
-extension GoalsPresenter {
-  public func setViewDelegate(delegate: GoalsPresenterDelegate) {
-    self.delegate = delegate
   }
 }
 
@@ -41,6 +34,10 @@ extension GoalsPresenter {
 
 extension GoalsPresenter: GoalsPresenterProtocol {
   var title: String { "Goals" }
+  
+  public func setViewDelegate(delegate: GoalsPresenterDelegate) {
+    self.delegate = delegate
+  }
   
   func getGoals() async {
     do {
