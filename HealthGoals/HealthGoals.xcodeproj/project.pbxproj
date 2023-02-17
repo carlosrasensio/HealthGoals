@@ -16,6 +16,7 @@
 		7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */; };
 		7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE94299F046800A1FF84 /* GoalsViewController.swift */; };
 		7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */; };
+		7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA0299F08DB00A1FF84 /* NetworkManager.swift */; };
 		7007FEA3299F0CB100A1FF84 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewCell.swift; sourceTree = "<group>"; };
 		7007FE94299F046800A1FF84 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsCoordinator.swift; sourceTree = "<group>"; };
+		7007FEA0299F08DB00A1FF84 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		7007FE9E299F08C600A1FF84 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEA4299F11F500A1FF84 /* Extensions */,
+				7007FE9F299F08D000A1FF84 /* Network */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7007FE9F299F08D000A1FF84 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEA0299F08DB00A1FF84 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		7007FEA4299F11F500A1FF84 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */,
 				7007FE90299F03E600A1FF84 /* Goal.swift in Sources */,
 				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
