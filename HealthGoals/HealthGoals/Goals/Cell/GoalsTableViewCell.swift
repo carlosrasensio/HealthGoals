@@ -15,8 +15,8 @@ protocol GoalsTableViewCellProtocol: AnyObject {
 
 final class GoalsTableViewCell: UITableViewCell {
   // MARK: Objects
+  private lazy var containerView = UIView()
   private lazy var titleLabel = UILabel()
-  private lazy var descriptionLabel = UILabel()
   
   // MARK: Initializers
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,7 +31,6 @@ final class GoalsTableViewCell: UITableViewCell {
   // MARK: Cell configuration
   override func prepareForReuse() {
     titleLabel.text = nil
-    descriptionLabel.text = nil
   }
 }
 
@@ -41,45 +40,44 @@ extension GoalsTableViewCell: GoalsTableViewCellProtocol {
   static var identifier: String { String(describing: self) }
   
   func setupUI() {
+    setupContentView()
     setupTitleLabel()
-    setupDescriptionLabel()
   }
   
   func setupInfo(with model: Goal) {
     titleLabel.text = model.title
-    descriptionLabel.text = model.description
   }
 }
 
 // MARK: - Private methods
 
 private extension GoalsTableViewCell {
-  func setupTitleLabel() {
-    titleLabel.backgroundColor = .systemCyan
-    titleLabel.textColor = .white
-    titleLabel.layer.cornerRadius = 5
-    titleLabel.layer.masksToBounds = true
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(titleLabel)
+  func setupContentView() {
+    containerView.backgroundColor = .systemCyan
+    containerView.layer.cornerRadius = 6
+    containerView.layer.masksToBounds = true
+    containerView.translatesAutoresizingMaskIntoConstraints = false
+    contentView.addSubview(containerView)
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
-      titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
-      titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 12),
-      titleLabel.heightAnchor.constraint(equalToConstant: 40)
+      containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+      containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+      containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+      containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)
     ])
   }
   
-  func setupDescriptionLabel() {
-    descriptionLabel.backgroundColor = .systemCyan
-    descriptionLabel.textColor = .white
-    descriptionLabel.numberOfLines = 0
-    descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(descriptionLabel)
+  func setupTitleLabel() {
+    titleLabel.textColor = .white
+    titleLabel.font = .boldSystemFont(ofSize: 30)
+    titleLabel.adjustsFontSizeToFitWidth = true
+    titleLabel.textAlignment = .center
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    containerView.addSubview(titleLabel)
     NSLayoutConstraint.activate([
-      descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-      descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
-      descriptionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 12),
-      descriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 12)
+      titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
+      titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
+      titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
+      titleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12),
     ])
   }
 }

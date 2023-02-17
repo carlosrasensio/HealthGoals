@@ -63,11 +63,11 @@ private extension GoalsViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(GoalsTableViewCell.self, forCellReuseIdentifier: GoalsTableViewCell.identifier)
-    tableView.backgroundColor = .clear
+    tableView.separatorStyle = .none
     tableView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(tableView)
     NSLayoutConstraint.activate([
-      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
       tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
