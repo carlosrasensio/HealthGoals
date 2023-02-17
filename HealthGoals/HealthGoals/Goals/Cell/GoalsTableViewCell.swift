@@ -55,7 +55,12 @@ private extension GoalsTableViewCell {
   func setupContentView() {
     containerView.backgroundColor = .systemCyan
     containerView.layer.cornerRadius = 6
-    containerView.layer.masksToBounds = true
+    containerView.layer.shadowOffset = .zero
+    containerView.layer.shadowRadius = 10
+    containerView.layer.shadowOpacity = 0.5
+    containerView.layer.shadowColor = UIColor.cyan.cgColor
+    containerView.layer.shouldRasterize = true
+    containerView.layer.rasterizationScale = UIScreen.main.scale
     containerView.translatesAutoresizingMaskIntoConstraints = false
     contentView.addSubview(containerView)
     NSLayoutConstraint.activate([
