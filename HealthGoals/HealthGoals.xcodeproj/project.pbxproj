@@ -16,6 +16,7 @@
 		7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */; };
 		7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE94299F046800A1FF84 /* GoalsViewController.swift */; };
 		7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */; };
+		7007FEA3299F0CB100A1FF84 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7007FE92299F043A00A1FF84 /* GoalsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTableViewCell.swift; sourceTree = "<group>"; };
 		7007FE94299F046800A1FF84 /* GoalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewController.swift; sourceTree = "<group>"; };
 		7007FE97299F04B500A1FF84 /* GoalsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsCoordinator.swift; sourceTree = "<group>"; };
+		7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				7007FE84299F036D00A1FF84 /* LaunchScreen.storyboard */,
 				7007FE87299F036D00A1FF84 /* Info.plist */,
 				7007FE8D299F03CC00A1FF84 /* Goals */,
+				7007FE9E299F08C600A1FF84 /* Utils */,
 				7007FE99299F054400A1FF84 /* Resources */,
 			);
 			path = HealthGoals;
@@ -115,6 +118,14 @@
 				7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7007FEA4299F11F500A1FF84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7007FEA2299F0CB100A1FF84 /* UIViewController+Alert.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
 				7007FE79299F036C00A1FF84 /* SceneDelegate.swift in Sources */,
+				7007FEA3299F0CB100A1FF84 /* UIViewController+Alert.swift in Sources */,
 				7007FE98299F04B500A1FF84 /* GoalsCoordinator.swift in Sources */,
 				7007FE93299F043A00A1FF84 /* GoalsTableViewCell.swift in Sources */,
 				7007FE95299F046800A1FF84 /* GoalsViewController.swift in Sources */,
