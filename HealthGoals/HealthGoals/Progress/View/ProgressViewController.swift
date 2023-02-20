@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HealthKitUI
 
 protocol ProgressViewControllerProtocol {
   func setupUI()
@@ -55,6 +56,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
     setupTypeLabel()
     setupTrophyLabel()
     setupPointsLabel()
+    setupHealthKitUI()
   }
   
   func setupInfo() {
@@ -84,10 +86,12 @@ private extension ProgressViewController {
   }
   
   func setupTitleLabel() {
-    titleLabel.backgroundColor = .systemCyan
-    titleLabel.textColor = .white
+    titleLabel.textColor = .systemCyan
     titleLabel.layer.cornerRadius = 5
     titleLabel.layer.masksToBounds = true
+    titleLabel.font = .boldSystemFont(ofSize: 30)
+    titleLabel.adjustsFontSizeToFitWidth = true
+    titleLabel.textAlignment = .center
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(titleLabel)
     NSLayoutConstraint.activate([
@@ -98,10 +102,11 @@ private extension ProgressViewController {
   }
   
   func setupDescriptionLabel() {
-    descriptionLabel.backgroundColor = .systemCyan
-    descriptionLabel.textColor = .white
+    descriptionLabel.textColor = .systemCyan
     descriptionLabel.layer.cornerRadius = 5
     descriptionLabel.layer.masksToBounds = true
+    descriptionLabel.font = .systemFont(ofSize: 18)
+    descriptionLabel.textAlignment = .center
     descriptionLabel.numberOfLines = 0
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(descriptionLabel)
@@ -113,24 +118,28 @@ private extension ProgressViewController {
   }
   
   func setupGoalLabel() {
-    goalLabel.backgroundColor = .systemCyan
-    goalLabel.textColor = .white
+    goalLabel.textColor = .systemCyan
     goalLabel.layer.cornerRadius = 5
     goalLabel.layer.masksToBounds = true
+    goalLabel.font = .boldSystemFont(ofSize: 14)
+    goalLabel.textAlignment = .center
+    goalLabel.adjustsFontSizeToFitWidth = true
     goalLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(goalLabel)
     NSLayoutConstraint.activate([
-      goalLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 12),
+      goalLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
       goalLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
       goalLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
   func setupTypeLabel() {
-    typeLabel.backgroundColor = .systemCyan
-    typeLabel.textColor = .white
+    typeLabel.textColor = .systemCyan
     typeLabel.layer.cornerRadius = 5
     typeLabel.layer.masksToBounds = true
+    typeLabel.font = .boldSystemFont(ofSize: 14)
+    typeLabel.textAlignment = .center
+    typeLabel.adjustsFontSizeToFitWidth = true
     typeLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(typeLabel)
     NSLayoutConstraint.activate([
@@ -141,24 +150,28 @@ private extension ProgressViewController {
   }
   
   func setupTrophyLabel() {
-    trophyLabel.backgroundColor = .systemCyan
-    trophyLabel.textColor = .white
+    trophyLabel.textColor = .systemCyan
     trophyLabel.layer.cornerRadius = 5
     trophyLabel.layer.masksToBounds = true
+    trophyLabel.font = .boldSystemFont(ofSize: 14)
+    trophyLabel.textAlignment = .center
+    trophyLabel.adjustsFontSizeToFitWidth = true
     trophyLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(trophyLabel)
     NSLayoutConstraint.activate([
-      trophyLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 12),
+      trophyLabel.topAnchor.constraint(equalTo: typeLabel.bottomAnchor, constant: 24),
       trophyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
       trophyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
   }
   
   func setupPointsLabel() {
-    pointsLabel.backgroundColor = .systemCyan
-    pointsLabel.textColor = .white
+    pointsLabel.textColor = .systemCyan
     pointsLabel.layer.cornerRadius = 5
     pointsLabel.layer.masksToBounds = true
+    pointsLabel.font = .boldSystemFont(ofSize: 14)
+    pointsLabel.textAlignment = .center
+    pointsLabel.adjustsFontSizeToFitWidth = true
     pointsLabel.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(pointsLabel)
     NSLayoutConstraint.activate([
@@ -166,6 +179,10 @@ private extension ProgressViewController {
       pointsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
       pointsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
     ])
+  }
+  
+  func setupHealthKitUI() {
+    
   }
   
   func showActivityIndicator(_ show: Bool = true) {
