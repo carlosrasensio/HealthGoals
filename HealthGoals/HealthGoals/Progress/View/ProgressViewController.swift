@@ -24,12 +24,10 @@ final class ProgressViewController: UIViewController {
   
   // MARK: Variables
   private let presenter: ProgressPresenterProtocol
-  private let coordinator: ProgressCoordinatorProtocol
     
   // MARK: Initializers
-  init(presenter: ProgressPresenterProtocol, coordinator: ProgressCoordinatorProtocol) {
+  init(presenter: ProgressPresenterProtocol) {
     self.presenter = presenter
-    self.coordinator = coordinator
     super.init(nibName: nil, bundle: nil)
   }
   

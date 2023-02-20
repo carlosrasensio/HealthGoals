@@ -24,12 +24,12 @@ protocol GoalsPresenterProtocol {
 final class GoalsPresenter {
   // MARK: Variables
   private weak var delegate: GoalsPresenterDelegate?
-  private let coordinator: GoalsCoordinatorProtocol
   private let networkManager: NetworkManagerProtocol
   private let coreDataManager: CoreDataManagerProtocol
+  var coordinator: Coordinator?
     
   // MARK: Initializers
-  init(coordinator: GoalsCoordinatorProtocol, networkManager: NetworkManagerProtocol, coreDataManager: CoreDataManagerProtocol) {
+  init(coordinator: Coordinator, networkManager: NetworkManagerProtocol, coreDataManager: CoreDataManagerProtocol) {
     self.coordinator = coordinator
     self.networkManager = networkManager
     self.coreDataManager = coreDataManager
@@ -65,7 +65,11 @@ extension GoalsPresenter: GoalsPresenterProtocol {
   }
   
   func didSelectGoal(_ goal: Goal) {
-    coordinator.navigateToProgress(for: goal)
+    coordinator?.navigateToProgressView(for: goal)
   }
 }
+
+// MARK: - Coordinating
+
+extension GoalsPresenter: Coordinating {}
 

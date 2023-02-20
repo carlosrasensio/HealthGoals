@@ -18,8 +18,7 @@ final class GoalsViewController: UIViewController {
   private lazy var tableView = UITableView()
   
   // MARK: Variables
-  private let presenter: GoalsPresenterProtocol
-  
+  private let presenter: GoalsPresenterProtocol  
   private var goals = [Goal]()
   
   // MARK: Initializers

@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol CoreDataManagerProtocol {
-  func saveGoal(_ goal: Goal)
+//  func saveGoal(_ goal: Goal)
   func deleteGoalWith(id: Int)
   func getCoreDataGoals() -> [Goal]
 }
@@ -37,15 +37,15 @@ final class CoreDataManager {
 // MARK:  - DataManagerProtocol
 
 extension CoreDataManager: CoreDataManagerProtocol {
-  func saveGoal(_ goal: Goal) {
-    let healthGoal = HealthGoal(context: context)
-    healthGoal.setValuesForKeys(["id": goal.id, "title": goal.title, "descr": goal.description, "goal": goal.goal, "type": goal.type, "rewardTrophy": goal.reward.trophy, "rewardPoints": goal.reward.points])
-    do {
-      try context.save()
-    } catch {
-      fatalError("\n❌ ERROR: failed to save goal --> \(error.localizedDescription)")
-    }
-  }
+//  func saveGoal(_ goal: Goal) {
+//    let healthGoal = HealthGoal(context: context)
+//    healthGoal.setValuesForKeys(["id": goal.id, "title": goal.title, "descr": goal.description, "goal": goal.goal, "type": goal.type, "rewardTrophy": goal.reward.trophy, "rewardPoints": goal.reward.points])
+//    do {
+//      try context.save()
+//    } catch {
+//      fatalError("\n❌ ERROR: failed to save goal --> \(error.localizedDescription)")
+//    }
+//  }
   
   func deleteGoalWith(id: Int) {
     let fetchRequest = NSFetchRequest<HealthGoal>(entityName: entityName)

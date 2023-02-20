@@ -40,6 +40,7 @@ extension GoalsTableViewCell: GoalsTableViewCellProtocol {
   static var identifier: String { String(describing: self) }
   
   func setupUI() {
+    contentView.backgroundColor = .white
     setupContainerView()
     setupTitleLabel()
   }
