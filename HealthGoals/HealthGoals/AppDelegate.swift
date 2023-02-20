@@ -10,6 +10,8 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  var window: UIWindow?
+  
   static let sharedAppDelegate: AppDelegate = {
     guard let delegate = UIApplication.shared.delegate as? AppDelegate else {
       fatalError("❌ ERROR: unexpected app delegate type, did it change? \(String(describing: UIApplication.shared.delegate))")
@@ -31,7 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }()
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    true
+    let navigationController = UINavigationController()
+    let coordinator = Coordinator()
+    coordinator.navigationController = navigationController
+    configureNavigationBar(navigationController)
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = navigationController
+    window.makeKeyAndVisible()
+    self.window = window
+    coordinator.start()
+    
+    return true
   }
   
   // MARK: UISceneSession Lifecycle
@@ -40,7 +52,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
+// MARK: - Navigation bar configuration
+
+private extension AppDelegate {
+  func configureNavigationBar(_ navigationController: UINavigationController) {
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = .systemCyan
+    appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+    appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+    navigationController.navigationBar.tintColor = .white
+    navigationController.navigationBar.standardAppearance = appearance
+    navigationController.navigationBar.compactAppearance = appearance
+    navigationController.navigationBar.scrollEdgeAppearance = appearance
+  }
+}
+
 // MARK: - Core Data
+
 extension AppDelegate {
   /// Core Data Saving support
   func saveContext() {

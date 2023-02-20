@@ -12,16 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
-    
-    // MARK: App main view configuration
-    window = UIWindow(frame: UIScreen.main.bounds)
-    let viewController = GoalsCoordinator().viewController
-    let navigationController = UINavigationController(rootViewController: viewController)
+    /// App main view configuration
+    let navigationController = UINavigationController()
+    let coordinator = Coordinator()
+    coordinator.navigationController = navigationController
     configureNavigationBar(navigationController)
-    window?.rootViewController = navigationController
-    window?.makeKeyAndVisible()
-    window?.windowScene = windowScene
-
+    let window = UIWindow(windowScene: windowScene)
+    window.rootViewController = navigationController
+    window.makeKeyAndVisible()
+    self.window = window
+    coordinator.start()
   }
   
   func sceneDidEnterBackground(_ scene: UIScene) {
