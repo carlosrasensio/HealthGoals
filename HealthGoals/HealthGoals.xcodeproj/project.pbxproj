@@ -42,6 +42,7 @@
 		7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenter.swift; sourceTree = "<group>"; };
 		7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		70F7944E299FDDD400CF0956 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		70F7945129A3DF6700CF0956 /* HealthGoals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthGoals.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		7007FE75299F036C00A1FF84 /* HealthGoals */ = {
 			isa = PBXGroup;
 			children = (
+				70F7945129A3DF6700CF0956 /* HealthGoals.entitlements */,
 				7007FE76299F036C00A1FF84 /* AppDelegate.swift */,
 				7007FE78299F036C00A1FF84 /* SceneDelegate.swift */,
 				7007FE84299F036D00A1FF84 /* LaunchScreen.storyboard */,
@@ -425,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthGoals/HealthGoals.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UTN2YWBKP2;
@@ -452,6 +455,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HealthGoals/HealthGoals.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UTN2YWBKP2;

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HealthKit
 
 protocol GoalsViewControllerProtocol {
   func setupUI()
@@ -18,7 +19,7 @@ final class GoalsViewController: UIViewController {
   private lazy var tableView = UITableView()
   
   // MARK: Variables
-  private let presenter: GoalsPresenterProtocol  
+  private let presenter: GoalsPresenterProtocol
   private var goals = [Goal]()
   
   // MARK: Initializers
@@ -36,6 +37,7 @@ final class GoalsViewController: UIViewController {
     super.viewDidLoad()
     setupUI()
     setupInfo()
+    presenter.requestAccessToHealthData()
   }
 }
 

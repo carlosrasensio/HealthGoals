@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import HealthKit
 
 protocol ProgressPresenterProtocol {
   var navigationItemTitle: String { get }
@@ -58,11 +57,12 @@ extension ProgressPresenter: ProgressPresenterProtocol {
   var trophy: String {
     guard let goalProgress else { return "-" }
     var trophy: String = ""
+    
     switch goalProgress.reward.trophy {
     case "gold_medal": trophy = "🥇 Gold medal"
     case "silver_medal": trophy = "🥈 Silver medal"
     case "bronze_medal": trophy = "🥉 Bronze medal"
-    default: "-"
+    default: trophy = "-"
     }
     
     return trophy

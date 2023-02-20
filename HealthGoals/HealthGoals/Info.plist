@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>HealthGoals wants to access your health data in order to analyze your health and give you the best advice</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>HealthGoals wants to access your health data in order to analyze your health and give you the best advice</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>HealthGoals wants to access your health data in order to analyze your health and give you the best advice</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

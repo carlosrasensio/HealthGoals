@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HealthKit
 
 protocol GoalsPresenterDelegate: AnyObject {
   func presentGoals(_ goals: [Goal])
@@ -19,6 +20,7 @@ protocol GoalsPresenterProtocol {
   func getGoals() async
   func saveGoals(_ goals: [Goal])
   func didSelectGoal(_ goal: Goal)
+  func requestAccessToHealthData()
 }
 
 final class GoalsPresenter {
@@ -27,6 +29,7 @@ final class GoalsPresenter {
   private let networkManager: NetworkManagerProtocol
   private let coreDataManager: CoreDataManagerProtocol
   var coordinator: Coordinator?
+  private let healthStore = HKHealthStore()
     
   // MARK: Initializers
   init(coordinator: Coordinator, networkManager: NetworkManagerProtocol, coreDataManager: CoreDataManagerProtocol) {
@@ -59,13 +62,29 @@ extension GoalsPresenter: GoalsPresenterProtocol {
   }
   
   func saveGoals(_ goals: [Goal]) {
-    goals.forEach {
-      coreDataManager.saveGoal($0)
-    }
+//    goals.forEach {
+//      coreDataManager.saveGoal($0)
+//    }
   }
   
   func didSelectGoal(_ goal: Goal) {
     coordinator?.navigateToProgressView(for: goal)
+  }
+  
+  func requestAccessToHealthData() {
+    let readableTypes: Set<HKSampleType> = [HKQuantityType.quantityType(forIdentifier: .walkingStepLength)!, HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!]
+    guard HKHealthStore.isHealthDataAvailable() else { return }
+    healthStore.requestAuthorization(toShare: nil, read: readableTypes) { [weak self] success, error in
+      guard let self else { return }
+      
+      if let error {
+        self.delegate?.presentAlert(title: "ERROR", message: error.localizedDescription)
+      }
+      
+      if success {
+        self.delegate?.presentAlert(title: "Request authorization", message: success.description)
+      }
+    }
   }
 }
 
