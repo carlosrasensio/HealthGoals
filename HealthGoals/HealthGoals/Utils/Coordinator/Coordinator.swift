@@ -19,8 +19,8 @@ protocol Coordinating {
   var coordinator: Coordinator? { get set }
 }
 
-class Coordinator {
-  // MARK: Variables
+final class Coordinator {
+  // MARK: Variable
   var navigationController: UINavigationController?
 }
 
