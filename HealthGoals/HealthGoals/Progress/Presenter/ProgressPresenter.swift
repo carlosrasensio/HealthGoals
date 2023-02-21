@@ -75,10 +75,10 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     var trophy: String = ""
     
     switch goalProgress.reward.trophy {
-    case "gold_medal": trophy = "🥇 Gold medal"
-    case "silver_medal": trophy = "🥈 Silver medal"
-    case "bronze_medal": trophy = "🥉 Bronze medal"
-    default: trophy = "-"
+    case .goldMedal: trophy = "🥇 Gold medal"
+    case .silverMedal: trophy = "🥈 Silver medal"
+    case .bronzeMedal: trophy = "🥉 Bronze medal"
+    case .zombieHand: trophy = "🧟‍♂️ Zombie hand"
     }
     
     return trophy
@@ -105,7 +105,7 @@ extension ProgressPresenter: ProgressPresenterProtocol {
   func getHealthInfo() {
     guard let goalProgress else { return }
     switch goalProgress.type {
-      case "step": getDailySteps()
+    case .step: getDailySteps()
       default: getDistanceWalkingRunning()
     }
   }
