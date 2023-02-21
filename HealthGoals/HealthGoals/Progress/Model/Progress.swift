@@ -7,7 +7,20 @@
 
 import Foundation
 
+// MARK: - Progress
 struct Progress {
   let goalId: Int
-  let steps: String
+  let movement: Movement
 }
+
+// MARK: - Movement
+struct Movement {
+  let distance: String
+  let type: MovementType
+  
+  enum MovementType: String {
+    case steps = "steps"
+    case distanceWalkingRunning = "km"
+  }
+}
+
