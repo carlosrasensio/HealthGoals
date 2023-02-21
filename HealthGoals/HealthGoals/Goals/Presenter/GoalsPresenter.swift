@@ -72,7 +72,7 @@ extension GoalsPresenter: GoalsPresenterProtocol {
   }
   
   func requestAccessToHealthData() {
-    let readableTypes: Set<HKSampleType> = [HKQuantityType.quantityType(forIdentifier: .walkingStepLength)!, HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!]
+    let readableTypes: Set<HKSampleType> = [HKQuantityType.quantityType(forIdentifier: .stepCount)!, HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!]
     guard HKHealthStore.isHealthDataAvailable() else { return }
     healthStore.requestAuthorization(toShare: nil, read: readableTypes) { [weak self] success, error in
       guard let self else { return }
