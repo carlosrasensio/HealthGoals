@@ -43,7 +43,7 @@ final class ProgressViewController: UIViewController {
   // MARK: Life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    presenter.getTodaySteps()
+    presenter.getHealthInfo()
     setupUI()
     setupInfo()
   }

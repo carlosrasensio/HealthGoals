@@ -25,8 +25,7 @@ protocol ProgressPresenterProtocol {
   
   func setViewDelegate(delegate: ProgressPresenterDelegate)
   func saveProgress(_ progress: Progress)
-  func getDailySteps()
-  func getDistanceWalkingRunning()
+  func getHealthInfo()
 }
 
 final class ProgressPresenter {
@@ -103,6 +102,18 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     coreDataManager.saveProgress(progress)
   }
   
+  func getHealthInfo() {
+    guard let goalProgress else { return }
+    switch goalProgress.type {
+      case "step": getDailySteps()
+      default: getDistanceWalkingRunning()
+    }
+  }
+}
+
+// MARK: - Private methods
+
+private extension ProgressPresenter {
   func getDailySteps() {
     let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
     let now = Date()
