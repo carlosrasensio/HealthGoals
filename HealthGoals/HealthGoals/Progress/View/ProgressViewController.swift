@@ -25,7 +25,7 @@ final class ProgressViewController: UIViewController {
   private lazy var trophyLabel = UILabel()
   private lazy var pointsLabel = UILabel()
   private lazy var stepsImageView = UIImageView()
-  private lazy var stepsLabel = UILabel()
+  private lazy var movementLabel = UILabel()
   
   // MARK: Variables
   private let presenter: ProgressPresenterProtocol
@@ -65,7 +65,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
   
   func setupHealthKitUI() {
     setupStepsImageView()
-    setupStepsLabel()
+    setupMovementLabel()
   }
   
   func setupInfo() {
@@ -80,7 +80,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
   }
   
   func setupHealthKitInfo() {
-    stepsLabel.text = presenter.movement
+    movementLabel.text = presenter.movement
   }
 }
 
@@ -188,24 +188,24 @@ private extension ProgressViewController {
     stepsImageView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(stepsImageView)
     NSLayoutConstraint.activate([
-      stepsImageView.topAnchor.constraint(equalTo: pointsLabel.bottomAnchor, constant: 24),
-      stepsImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-      stepsImageView.heightAnchor.constraint(equalToConstant: 24),
-      stepsImageView.widthAnchor.constraint(equalToConstant: 24),
+      stepsImageView.topAnchor.constraint(equalTo: pointsLabel.bottomAnchor, constant: 48),
+      stepsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      stepsImageView.heightAnchor.constraint(equalToConstant: 80),
+      stepsImageView.widthAnchor.constraint(equalToConstant: 80)
     ])
   }
   
-  func setupStepsLabel() {
-    stepsLabel.textColor = .systemCyan
-    stepsLabel.font = .boldSystemFont(ofSize: 14)
-    stepsLabel.textAlignment = .left
-    stepsLabel.adjustsFontSizeToFitWidth = true
-    stepsLabel.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(stepsLabel)
+  func setupMovementLabel() {
+    movementLabel.textColor = .systemCyan
+    movementLabel.font = .boldSystemFont(ofSize: 24)
+    movementLabel.textAlignment = .center
+    movementLabel.adjustsFontSizeToFitWidth = true
+    movementLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(movementLabel)
     NSLayoutConstraint.activate([
-      stepsLabel.centerYAnchor.constraint(equalTo: stepsImageView.centerYAnchor),
-      stepsLabel.leadingAnchor.constraint(equalTo: stepsImageView.trailingAnchor, constant: 12),
-      stepsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+      movementLabel.topAnchor.constraint(equalTo: stepsImageView.bottomAnchor, constant: 12),
+      movementLabel.centerXAnchor.constraint(equalTo: stepsImageView.centerXAnchor)
+
     ])
   }
   
