@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Progress {
+  let goalId: Int
+  let steps: String
+}
