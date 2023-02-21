@@ -62,9 +62,9 @@ extension GoalsPresenter: GoalsPresenterProtocol {
   }
   
   func saveGoals(_ goals: [Goal]) {
-//    goals.forEach {
-//      coreDataManager.saveGoal($0)
-//    }
+    goals.forEach {
+      coreDataManager.saveGoal($0)
+    }
   }
   
   func didSelectGoal(_ goal: Goal) {

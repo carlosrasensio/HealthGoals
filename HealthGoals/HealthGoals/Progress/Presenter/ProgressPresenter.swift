@@ -18,6 +18,7 @@ protocol ProgressPresenterProtocol {
   var points: String { get }
   var steps: String { get }
   
+  func saveProgress(_ progress: Progress)
   func getTodaySteps()
 }
 
@@ -102,6 +103,8 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     })
     
     observerQuery.map(healthStore.execute)
+  func saveProgress(_ progress: Progress) {
+    coreDataManager.saveProgress(progress)
   }
 }
 

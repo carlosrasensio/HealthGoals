@@ -20,7 +20,7 @@ extension NetworkManager: NetworkManagerProtocol {
     var goals = [Goal]()
     let urlString = "https://d9fd1bed-3c81-43a5-bb37-bc97488093f7.mock.pstmn.io/goals"
     guard let url = URL(string: urlString) else {
-      print("\n❌ ERROR: URL not valid\n")
+      print("\n❌ ERROR: URL not valid")
       return goals
     }
     
@@ -30,9 +30,8 @@ extension NetworkManager: NetworkManagerProtocol {
     do {
       let response = try JSONDecoder().decode(GoalsResponse.self, from: data)
       goals = response.goals
-      print(goals)
     } catch {
-      print("\n❌ ERROR: \(error.localizedDescription)\n")
+      print("\n❌ ERROR: \(error.localizedDescription)")
     }
     
     return goals

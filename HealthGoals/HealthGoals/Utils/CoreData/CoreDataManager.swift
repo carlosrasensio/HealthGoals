@@ -9,17 +9,19 @@ import Foundation
 import CoreData
 
 protocol CoreDataManagerProtocol {
-//  func saveGoal(_ goal: Goal)
+  func saveGoal(_ goal: Goal)
   func deleteGoalWith(id: Int)
   func getCoreDataGoals() -> [Goal]
+  func saveProgress(_ progress: Progress)
 }
 
 final class CoreDataManager {
   // MARK: Variables
-  private let entityName = "HealthGoal"
+  private let healthGoalEntity = "HealthGoal"
+  private let goalProgressEntity = "GoalProgress"
 
-  private lazy var persistentContainer: NSPersistentContainer = {
-    let persistentContainer = NSPersistentContainer(name: entityName)
+  private lazy var goalPersistentContainer: NSPersistentContainer = {
+    let persistentContainer = NSPersistentContainer(name: healthGoalEntity)
     persistentContainer.loadPersistentStores { _, error in
       if let error = error as NSError? {
         print("\n❌ ERROR: \(error.localizedDescription), \(error.userInfo)")
@@ -29,43 +31,58 @@ final class CoreDataManager {
     return persistentContainer
   }()
   
-  var context: NSManagedObjectContext {
-      persistentContainer.viewContext
+  var goalContext: NSManagedObjectContext {
+      goalPersistentContainer.viewContext
+  }
+  
+  private lazy var progressPersistentContainer: NSPersistentContainer = {
+    let persistentContainer = NSPersistentContainer(name: goalProgressEntity)
+    persistentContainer.loadPersistentStores { _, error in
+      if let error = error as NSError? {
+        print("\n❌ ERROR: \(error.localizedDescription), \(error.userInfo)")
+      }
+    }
+    
+    return persistentContainer
+  }()
+  
+  var progressContext: NSManagedObjectContext {
+    progressPersistentContainer.viewContext
   }
 }
 
 // MARK:  - DataManagerProtocol
 
 extension CoreDataManager: CoreDataManagerProtocol {
-//  func saveGoal(_ goal: Goal) {
-//    let healthGoal = HealthGoal(context: context)
+  func saveGoal(_ goal: Goal) {
+//    let healthGoal = HealthGoal(context: goalContext)
 //    healthGoal.setValuesForKeys(["id": goal.id, "title": goal.title, "descr": goal.description, "goal": goal.goal, "type": goal.type, "rewardTrophy": goal.reward.trophy, "rewardPoints": goal.reward.points])
 //    do {
-//      try context.save()
+//      try goalContext.save()
 //    } catch {
 //      fatalError("\n❌ ERROR: failed to save goal --> \(error.localizedDescription)")
 //    }
-//  }
+  }
   
   func deleteGoalWith(id: Int) {
-    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: entityName)
+    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: healthGoalEntity)
     fetchRequest.predicate = NSPredicate(format:"id = %@", id)
     do {
-      let goals = try context.fetch(fetchRequest)
+      let goals = try goalContext.fetch(fetchRequest)
       if goals.count > 0 {
-        context.delete(goals[0])
+        goalContext.delete(goals[0])
       }
-      try context.save()
+      try goalContext.save()
     } catch {
       fatalError("\n❌ ERROR: failed to delete goal --> \(error.localizedDescription)")
     }
   }
   
   func getCoreDataGoals() -> [Goal] {
-    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: entityName)
+    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: healthGoalEntity)
     var goals = [Goal]()
     do {
-      let healthGoals = try context.fetch(fetchRequest)
+      let healthGoals = try goalContext.fetch(fetchRequest)
       goals = healthGoals.map {
         Goal(id: Int($0.id), goal: $0.goal!, description: $0.descr!, title: $0.title!, type: $0.type!, reward: Reward(trophy: $0.rewardTrophy!, points: $0.rewardPoints!))
       }
@@ -75,4 +92,14 @@ extension CoreDataManager: CoreDataManagerProtocol {
     
     return goals
   }
+  
+    func saveProgress(_ progress: Progress) {
+  //    let goalProgress = HealthProgress(context: progressContext)
+  //    goalProgress.setValuesForKeys(["id": progress.goalId, "steps": progress.steps])
+  //    do {
+  //      try progressContext.save()
+  //    } catch {
+  //      fatalError("\n❌ ERROR: failed to save goal progress --> \(error.localizedDescription)")
+  //    }
+    }
 }
