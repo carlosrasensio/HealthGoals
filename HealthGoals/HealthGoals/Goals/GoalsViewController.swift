@@ -64,6 +64,7 @@ private extension GoalsViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(GoalsTableViewCell.self, forCellReuseIdentifier: GoalsTableViewCell.identifier)
+    tableView.backgroundColor = .white
     tableView.separatorStyle = .none
     tableView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(tableView)

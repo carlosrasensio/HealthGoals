@@ -82,7 +82,7 @@ extension GoalsPresenter: GoalsPresenterProtocol {
       }
       
       if success {
-        self.delegate?.presentAlert(title: "Request authorization", message: success.description)
+        print("\nℹ️ Request authorization: \(success.description)")
       }
     }
   }
