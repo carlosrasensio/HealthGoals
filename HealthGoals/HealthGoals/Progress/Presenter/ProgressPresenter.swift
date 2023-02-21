@@ -82,46 +82,22 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     return "Points: \(goalProgress.reward.points)"
   }
   
-  var steps: String {
-    return "Steps: \(mySteps)"
+  var steps: String { "Steps: \(mySteps)" }
   }
   
-  func getTodaySteps() {
-    guard let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount) else {
-      print("\n❌ ERROR: identifier .stepCount")
-      return
-    }
-    
-    observerQuery = HKObserverQuery(sampleType: stepCountType, predicate: nil, updateHandler: { [weak self] _, _, error in
-      guard let self else { return }
-      
-      if let error {
-        print("\n❌ ERROR: \(error.localizedDescription)")
-      }
-      
-      self.getMySteps()
-    })
-    
-    observerQuery.map(healthStore.execute)
   func saveProgress(_ progress: Progress) {
     coreDataManager.saveProgress(progress)
   }
-}
-
-// MARK: - Private methods
-
-private extension ProgressPresenter {
-  func getMySteps() {
+  
+  func getTodaySteps() {
     let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
     let now = Date()
     let startOfDay = Calendar.current.startOfDay(for: now)
     let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
-        
-    query = HKStatisticsQuery(
-      quantityType: stepsQuantityType,
-      quantitySamplePredicate: predicate,
-      options: .cumulativeSum,
-      completionHandler: { _, result, error in
+            
+    query = HKStatisticsQuery(quantityType: stepsQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { [weak self] _, result, error in
+      guard let self else { return }
+
       if let error {
         print("\n❌ ERROR: \(error.localizedDescription)")
       }
@@ -136,8 +112,12 @@ private extension ProgressPresenter {
       
       DispatchQueue.main.async {
         self.mySteps = String(Int(sum.doubleValue(for: HKUnit.count())))
+        guard let goalProgress = self.goalProgress,
+              let delegate = self.delegate else { return }
+        
+        let progress = Progress(goalId: goalProgress.id, steps: self.mySteps)
       }
-    })
+    }
     
     query.map(healthStore.execute)
   }
