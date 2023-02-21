@@ -21,11 +21,12 @@ protocol ProgressPresenterProtocol {
   var type: String { get }
   var trophy: String { get }
   var points: String { get }
-  var steps: String { get }
+  var movement: String { get }
   
   func setViewDelegate(delegate: ProgressPresenterDelegate)
   func saveProgress(_ progress: Progress)
-  func getTodaySteps()
+  func getDailySteps()
+  func getDistanceWalkingRunning()
 }
 
 final class ProgressPresenter {
@@ -35,8 +36,8 @@ final class ProgressPresenter {
   private var goalProgress: Goal?
   private let healthStore = HKHealthStore()
   private var observerQuery: HKObserverQuery?
-  private var mySteps = "0"
   private var query: HKStatisticsQuery?
+  private var myDailyMovement: Movement?
   
   // MARK: Initializer
   init(goal: Goal? = nil, coreDataManager: CoreDataManagerProtocol) {
@@ -89,7 +90,10 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     return "Points: \(goalProgress.reward.points)"
   }
   
-  var steps: String { "Steps: \(mySteps)" }
+  var movement: String {
+    guard let myDailyMovement else { return "-" }
+    return "Movement: \(myDailyMovement.distance) \(myDailyMovement.type.rawValue)"
+  }
   
   public func setViewDelegate(delegate: ProgressPresenterDelegate) {
     self.delegate = delegate
@@ -99,7 +103,7 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     coreDataManager.saveProgress(progress)
   }
   
-  func getTodaySteps() {
+  func getDailySteps() {
     let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
     let now = Date()
     let startOfDay = Calendar.current.startOfDay(for: now)
@@ -115,18 +119,61 @@ extension ProgressPresenter: ProgressPresenterProtocol {
       
       guard let result, let sum = result.sumQuantity() else {
         DispatchQueue.main.async {
-          self.mySteps = String(Int(0))
+          self.myDailyMovement = Movement(distance: String(Int(0)), type: .steps)
         }
         
         return
       }
       
       DispatchQueue.main.async {
-        self.mySteps = String(Int(sum.doubleValue(for: HKUnit.count())))
+        self.myDailyMovement = Movement(distance: String(Int(sum.doubleValue(for: HKUnit.count()))), type: .steps)
         guard let goalProgress = self.goalProgress,
-              let delegate = self.delegate else { return }
+              let delegate = self.delegate,
+              let myDailyMovement = self.myDailyMovement
+        else { return }
         
-        let progress = Progress(goalId: goalProgress.id, steps: self.mySteps)
+        let progress = Progress(goalId: goalProgress.id, movement: myDailyMovement)
+        delegate.presentProgress(progress)
+      }
+    }
+    
+    query.map(healthStore.execute)
+  }
+  
+  func getDistanceWalkingRunning() {
+    let distanceQuantityType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)!
+    let now = Date()
+    let startOfDay = Calendar.current.startOfDay(for: now)
+    let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+            
+    query = HKStatisticsQuery(quantityType: distanceQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { [weak self] _, result, error in
+      guard let self else { return }
+
+      if let error {
+        print("\n❌ ERROR: \(error.localizedDescription)")
+        self.delegate?.presentAlert(title: "ERROR", message: error.localizedDescription)
+      }
+      
+      guard let result, let sum = result.sumQuantity() else {
+        DispatchQueue.main.async {
+          self.myDailyMovement = Movement(distance: String(Int(0)), type: .distanceWalkingRunning)
+        }
+        
+        return
+      }
+      
+      DispatchQueue.main.async {
+        let unit = HKUnit.meter()
+        let metersDistance = Int(sum.doubleValue(for: unit))
+        let kilometersDistance = metersDistance / 1000
+        self.myDailyMovement = Movement(distance: String(kilometersDistance), type: .distanceWalkingRunning)
+        
+        guard let goalProgress = self.goalProgress,
+              let delegate = self.delegate,
+              let myDailyMovement = self.myDailyMovement
+        else { return }
+        
+        let progress = Progress(goalId: goalProgress.id, movement: myDailyMovement)
         delegate.presentProgress(progress)
       }
     }

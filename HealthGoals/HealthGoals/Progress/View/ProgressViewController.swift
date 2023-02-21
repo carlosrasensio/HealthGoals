@@ -80,7 +80,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
   }
   
   func setupHealthKitInfo() {
-    stepsLabel.text = presenter.steps
+    stepsLabel.text = presenter.movement
   }
 }
 
