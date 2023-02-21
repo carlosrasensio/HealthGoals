@@ -8,6 +8,11 @@
 import Foundation
 import HealthKit
 
+protocol ProgressPresenterDelegate: AnyObject {
+  func presentProgress(_ progress: Progress)
+  func presentAlert(title: String, message: String)
+}
+
 protocol ProgressPresenterProtocol {
   var navigationItemTitle: String { get }
   var title: String { get }
@@ -18,12 +23,14 @@ protocol ProgressPresenterProtocol {
   var points: String { get }
   var steps: String { get }
   
+  func setViewDelegate(delegate: ProgressPresenterDelegate)
   func saveProgress(_ progress: Progress)
   func getTodaySteps()
 }
 
 final class ProgressPresenter {
   // MARK: Variables
+  private weak var delegate: ProgressPresenterDelegate?
   private let coreDataManager: CoreDataManagerProtocol
   private var goalProgress: Goal?
   private let healthStore = HKHealthStore()
@@ -83,6 +90,9 @@ extension ProgressPresenter: ProgressPresenterProtocol {
   }
   
   var steps: String { "Steps: \(mySteps)" }
+  
+  public func setViewDelegate(delegate: ProgressPresenterDelegate) {
+    self.delegate = delegate
   }
   
   func saveProgress(_ progress: Progress) {
@@ -100,6 +110,7 @@ extension ProgressPresenter: ProgressPresenterProtocol {
 
       if let error {
         print("\n❌ ERROR: \(error.localizedDescription)")
+        self.delegate?.presentAlert(title: "ERROR", message: error.localizedDescription)
       }
       
       guard let result, let sum = result.sumQuantity() else {
@@ -116,6 +127,7 @@ extension ProgressPresenter: ProgressPresenterProtocol {
               let delegate = self.delegate else { return }
         
         let progress = Progress(goalId: goalProgress.id, steps: self.mySteps)
+        delegate.presentProgress(progress)
       }
     }
     

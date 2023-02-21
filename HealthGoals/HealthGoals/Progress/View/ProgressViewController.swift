@@ -61,7 +61,6 @@ extension ProgressViewController: ProgressViewControllerProtocol {
     setupTypeLabel()
     setupTrophyLabel()
     setupPointsLabel()
-    setupHealthKitUI()
   }
   
   func setupHealthKitUI() {
@@ -77,7 +76,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
     typeLabel.text = presenter.type
     trophyLabel.text = presenter.trophy
     pointsLabel.text = presenter.points
-    setupHealthKitInfo()
+    presenter.setViewDelegate(delegate: self)
   }
   
   func setupHealthKitInfo() {
@@ -213,5 +212,21 @@ private extension ProgressViewController {
   func showActivityIndicator(_ show: Bool = true) {
     activityIndicator.isHidden = !show
     show ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+  }
+}
+
+// MARK: - ProgressPresenterDelegate
+
+extension ProgressViewController: ProgressPresenterDelegate {
+  func presentProgress(_ progress: Progress) {
+    setupHealthKitUI()
+    setupHealthKitInfo()
+    presenter.saveProgress(progress)
+  }
+  
+  func presentAlert(title: String, message: String) {
+    DispatchQueue.main.async {
+      self.showAlert(title: title, message: message)
+    }
   }
 }
