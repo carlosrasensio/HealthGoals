@@ -17,10 +17,10 @@ struct Progress {
 struct Movement {
   let distance: String
   let type: MovementType
-  
-  enum MovementType: String {
-    case steps = "steps"
-    case distanceWalkingRunning = "km"
-  }
+}
+
+enum MovementType: String {
+  case steps = "steps"
+  case distanceWalkingRunning = "km"
 }
 

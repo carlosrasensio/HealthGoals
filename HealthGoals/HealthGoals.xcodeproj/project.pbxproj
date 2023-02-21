@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE76299F036C00A1FF84 /* AppDelegate.swift */; };
 		7007FE79299F036C00A1FF84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE78299F036C00A1FF84 /* SceneDelegate.swift */; };
-		7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */; };
 		7007FE83299F036D00A1FF84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7007FE82299F036D00A1FF84 /* Assets.xcassets */; };
 		7007FE86299F036D00A1FF84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7007FE84299F036D00A1FF84 /* LaunchScreen.storyboard */; };
 		7007FE90299F03E600A1FF84 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FE8F299F03E600A1FF84 /* Goal.swift */; };
@@ -22,6 +21,7 @@
 		7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */; };
 		7007FEB1299F37E000A1FF84 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */; };
 		709B4CA129A52F3900846E9F /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CA029A52F3900846E9F /* Progress.swift */; };
+		709B4CAA29A57CA400846E9F /* HealthGoals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CA829A57CA400846E9F /* HealthGoals.xcdatamodeld */; };
 		70F7944F299FDDD400CF0956 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F7944E299FDDD400CF0956 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,6 @@
 		7007FE73299F036C00A1FF84 /* HealthGoals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthGoals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7007FE76299F036C00A1FF84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7007FE78299F036C00A1FF84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7007FE80299F036C00A1FF84 /* HealthGoals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthGoals.xcdatamodel; sourceTree = "<group>"; };
 		7007FE82299F036D00A1FF84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7007FE85299F036D00A1FF84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7007FE87299F036D00A1FF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 		7007FEAB299F185F00A1FF84 /* ProgressPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenter.swift; sourceTree = "<group>"; };
 		7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		709B4CA029A52F3900846E9F /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		709B4CA929A57CA400846E9F /* HealthGoals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthGoals.xcdatamodel; sourceTree = "<group>"; };
 		70F7944E299FDDD400CF0956 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		70F7945129A3DF6700CF0956 /* HealthGoals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthGoals.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */,
-				7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */,
+				709B4CA829A57CA400846E9F /* HealthGoals.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -292,8 +292,8 @@
 				7007FEA1299F08DC00A1FF84 /* NetworkManager.swift in Sources */,
 				7007FE90299F03E600A1FF84 /* Goal.swift in Sources */,
 				70F7944F299FDDD400CF0956 /* Coordinator.swift in Sources */,
-				7007FE81299F036C00A1FF84 /* HealthGoals.xcdatamodeld in Sources */,
 				7007FEB1299F37E000A1FF84 /* CoreDataManager.swift in Sources */,
+				709B4CAA29A57CA400846E9F /* HealthGoals.xcdatamodeld in Sources */,
 				7007FEAC299F185F00A1FF84 /* ProgressPresenter.swift in Sources */,
 				7007FEAA299F185500A1FF84 /* ProgressViewController.swift in Sources */,
 				7007FE77299F036C00A1FF84 /* AppDelegate.swift in Sources */,
@@ -520,12 +520,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7007FE7F299F036C00A1FF84 /* HealthGoals.xcdatamodeld */ = {
+		709B4CA829A57CA400846E9F /* HealthGoals.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7007FE80299F036C00A1FF84 /* HealthGoals.xcdatamodel */,
+				709B4CA929A57CA400846E9F /* HealthGoals.xcdatamodel */,
 			);
-			currentVersion = 7007FE80299F036C00A1FF84 /* HealthGoals.xcdatamodel */;
+			currentVersion = 709B4CA929A57CA400846E9F /* HealthGoals.xcdatamodel */;
 			path = HealthGoals.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

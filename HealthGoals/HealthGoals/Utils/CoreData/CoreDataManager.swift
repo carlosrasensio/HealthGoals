@@ -13,41 +13,42 @@ protocol CoreDataManagerProtocol {
   func deleteGoalWith(id: Int)
   func getCoreDataGoals() -> [Goal]
   func saveProgress(_ progress: Progress)
+  func deleteProgressWith(id: Int)
+  func getCoreDataProgress() -> [Progress]
 }
 
 final class CoreDataManager {
   // MARK: Variables
+  private let coreDataModel = "HealthGoals"
   private let healthGoalEntity = "HealthGoal"
   private let goalProgressEntity = "GoalProgress"
-
-  private lazy var goalPersistentContainer: NSPersistentContainer = {
-    let persistentContainer = NSPersistentContainer(name: healthGoalEntity)
-    persistentContainer.loadPersistentStores { _, error in
+  
+  // MARK: Core Data stack
+  lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: coreDataModel)
+    container.loadPersistentStores(completionHandler: { _, error in
       if let error = error as NSError? {
-        print("\n❌ ERROR: \(error.localizedDescription), \(error.userInfo)")
+        fatalError("\n❌ Unresolved error \(error), \(error.userInfo)")
       }
-    }
+    })
     
-    return persistentContainer
+    return container
   }()
   
-  var goalContext: NSManagedObjectContext {
-      goalPersistentContainer.viewContext
+  var context: NSManagedObjectContext {
+      persistentContainer.viewContext
   }
   
-  private lazy var progressPersistentContainer: NSPersistentContainer = {
-    let persistentContainer = NSPersistentContainer(name: goalProgressEntity)
-    persistentContainer.loadPersistentStores { _, error in
-      if let error = error as NSError? {
-        print("\n❌ ERROR: \(error.localizedDescription), \(error.userInfo)")
+  // MARK: Core Data Saving support
+  func saveContext() {
+    if context.hasChanges {
+      do {
+        try context.save()
+      } catch {
+        let nserror = error as NSError
+        fatalError("\n❌ Unresolved error \(nserror), \(nserror.userInfo)")
       }
     }
-    
-    return persistentContainer
-  }()
-  
-  var progressContext: NSManagedObjectContext {
-    progressPersistentContainer.viewContext
   }
 }
 
@@ -55,51 +56,108 @@ final class CoreDataManager {
 
 extension CoreDataManager: CoreDataManagerProtocol {
   func saveGoal(_ goal: Goal) {
-//    let healthGoal = HealthGoal(context: goalContext)
-//    healthGoal.setValuesForKeys(["id": goal.id, "title": goal.title, "descr": goal.description, "goal": goal.goal, "type": goal.type, "rewardTrophy": goal.reward.trophy, "rewardPoints": goal.reward.points])
-//    do {
-//      try goalContext.save()
-//    } catch {
-//      fatalError("\n❌ ERROR: failed to save goal --> \(error.localizedDescription)")
-//    }
+    let fetchRequest: NSFetchRequest<HealthGoal> = HealthGoal.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == %@", String(goal.id))
+    
+    do {
+      let goals = try context.fetch(fetchRequest)
+      let filteredGoals = goals.filter { String(goal.id) == $0.id }
+      
+      if filteredGoals.isEmpty {
+        let goalEntity = NSEntityDescription.entity(forEntityName: healthGoalEntity, in: context)!
+        let healthGoal = NSManagedObject(entity: goalEntity, insertInto: context)
+        
+        healthGoal.setValuesForKeys(["id": String(goal.id), "title": goal.title, "desc": goal.description, "goal": goal.goal, "type": goal.type.rawValue, "trophy": goal.reward.trophy.rawValue, "points": goal.reward.points])
+        
+        try context.save()
+      }
+    } catch {
+      fatalError("\n❌ ERROR: failed to save goal --> \(error.localizedDescription)")
+    }
   }
   
   func deleteGoalWith(id: Int) {
-    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: healthGoalEntity)
-    fetchRequest.predicate = NSPredicate(format:"id = %@", id)
+    let fetchRequest: NSFetchRequest<HealthGoal> = HealthGoal.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == %@", String(id))
+
+    guard let goal = try? context.fetch(fetchRequest).first else {
+        print("\nℹ️ Goal with ID \(id) not found")
+        return
+    }
+
+    context.delete(goal)
+
     do {
-      let goals = try goalContext.fetch(fetchRequest)
-      if goals.count > 0 {
-        goalContext.delete(goals[0])
-      }
-      try goalContext.save()
+        try context.save()
     } catch {
-      fatalError("\n❌ ERROR: failed to delete goal --> \(error.localizedDescription)")
+        print("\n❌ Error saving context: \(error)")
     }
   }
   
   func getCoreDataGoals() -> [Goal] {
-    let fetchRequest = NSFetchRequest<HealthGoal>(entityName: healthGoalEntity)
-    var goals = [Goal]()
     do {
-      let healthGoals = try goalContext.fetch(fetchRequest)
-      goals = healthGoals.map {
-        Goal(id: Int($0.id), goal: $0.goal!, description: $0.descr!, title: $0.title!, type: $0.type!, reward: Reward(trophy: $0.rewardTrophy!, points: $0.rewardPoints!))
+      let fetchRequest: NSFetchRequest<HealthGoal> = HealthGoal.fetchRequest()
+      let healthGoals = try context.fetch(fetchRequest)
+      let goals = healthGoals.map {
+        Goal(id: Int($0.id!)!, goal: $0.goal!, description: $0.desc!, title: $0.title!, type: GoalType(rawValue: $0.type!)!, reward: Reward(trophy: Trophy(rawValue: $0.trophy!)!, points: $0.points!))
       }
-    } catch let error as NSError {
-      print("\n❌ ERROR: failed to get goals --> \(error.localizedDescription), \(error.userInfo)")
+      
+      return goals
+    } catch {
+      fatalError("\n❌ ERROR: failed to get goals --> \(error.localizedDescription)")
     }
-    
-    return goals
   }
   
-    func saveProgress(_ progress: Progress) {
-  //    let goalProgress = HealthProgress(context: progressContext)
-  //    goalProgress.setValuesForKeys(["id": progress.goalId, "steps": progress.steps])
-  //    do {
-  //      try progressContext.save()
-  //    } catch {
-  //      fatalError("\n❌ ERROR: failed to save goal progress --> \(error.localizedDescription)")
-  //    }
+  func saveProgress(_ progress: Progress) {
+    let fetchRequest: NSFetchRequest<GoalProgress> = GoalProgress.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == %@", String(progress.goalId))
+    
+    do {
+      let fetchedProgress = try context.fetch(fetchRequest)
+      let filteredProgress = fetchedProgress.filter { String(progress.goalId) == $0.id}
+      
+      if filteredProgress.isEmpty {
+        let progressEntity = NSEntityDescription.entity(forEntityName: goalProgressEntity, in: context)!
+        let goalProgress = NSManagedObject(entity: progressEntity, insertInto: context)
+        
+        goalProgress.setValuesForKeys(["id": String(progress.goalId), "distance": progress.movement.distance, "movementType": progress.movement.type.rawValue])
+        
+        try context.save()
+      }
+    } catch {
+      fatalError("\n❌ ERROR: failed to save progress --> \(error.localizedDescription)")
     }
+  }
+  
+  func deleteProgressWith(id: Int) {
+    let fetchRequest: NSFetchRequest<GoalProgress> = GoalProgress.fetchRequest()
+    fetchRequest.predicate = NSPredicate(format: "id == %@", String(id))
+
+    guard let progress = try? context.fetch(fetchRequest).first else {
+        print("\nℹ️ Progress with ID \(id) not found")
+        return
+    }
+
+    context.delete(progress)
+
+    do {
+        try context.save()
+    } catch {
+        print("\n❌ Error saving context: \(error)")
+    }
+  }
+  
+  func getCoreDataProgress() -> [Progress] {
+    do {
+      let fetchRequest: NSFetchRequest<GoalProgress> = GoalProgress.fetchRequest()
+      let goalProgress = try context.fetch(fetchRequest)
+      let progress = goalProgress.map {
+        Progress(goalId: Int($0.id!)!, movement: Movement(distance: $0.distance!, type: MovementType(rawValue: $0.movementType!)!))
+      }
+      
+      return progress
+    } catch {
+      fatalError("\n❌ ERROR: failed to get progress --> \(error.localizedDescription)")
+    }
+  }
 }
