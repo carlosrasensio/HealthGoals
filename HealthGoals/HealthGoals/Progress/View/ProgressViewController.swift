@@ -10,7 +10,9 @@ import HealthKitUI
 
 protocol ProgressViewControllerProtocol {
   func setupUI()
+  func setupHealthKitUI()
   func setupInfo()
+  func setupHealthKitInfo()
 }
 
 final class ProgressViewController: UIViewController {
@@ -22,6 +24,8 @@ final class ProgressViewController: UIViewController {
   private lazy var typeLabel = UILabel()
   private lazy var trophyLabel = UILabel()
   private lazy var pointsLabel = UILabel()
+  private lazy var stepsImageView = UIImageView()
+  private lazy var stepsLabel = UILabel()
   
   // MARK: Variables
   private let presenter: ProgressPresenterProtocol
@@ -39,6 +43,7 @@ final class ProgressViewController: UIViewController {
   // MARK: Life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+    presenter.getTodaySteps()
     setupUI()
     setupInfo()
   }
@@ -59,6 +64,11 @@ extension ProgressViewController: ProgressViewControllerProtocol {
     setupHealthKitUI()
   }
   
+  func setupHealthKitUI() {
+    setupStepsImageView()
+    setupStepsLabel()
+  }
+  
   func setupInfo() {
     navigationItem.title = presenter.navigationItemTitle
     titleLabel.text = presenter.title
@@ -67,6 +77,11 @@ extension ProgressViewController: ProgressViewControllerProtocol {
     typeLabel.text = presenter.type
     trophyLabel.text = presenter.trophy
     pointsLabel.text = presenter.points
+    setupHealthKitInfo()
+  }
+  
+  func setupHealthKitInfo() {
+    stepsLabel.text = presenter.steps
   }
 }
 
@@ -87,8 +102,6 @@ private extension ProgressViewController {
   
   func setupTitleLabel() {
     titleLabel.textColor = .systemCyan
-    titleLabel.layer.cornerRadius = 5
-    titleLabel.layer.masksToBounds = true
     titleLabel.font = .boldSystemFont(ofSize: 30)
     titleLabel.adjustsFontSizeToFitWidth = true
     titleLabel.textAlignment = .center
@@ -103,8 +116,6 @@ private extension ProgressViewController {
   
   func setupDescriptionLabel() {
     descriptionLabel.textColor = .systemCyan
-    descriptionLabel.layer.cornerRadius = 5
-    descriptionLabel.layer.masksToBounds = true
     descriptionLabel.font = .systemFont(ofSize: 18)
     descriptionLabel.textAlignment = .center
     descriptionLabel.numberOfLines = 0
@@ -119,8 +130,6 @@ private extension ProgressViewController {
   
   func setupGoalLabel() {
     goalLabel.textColor = .systemCyan
-    goalLabel.layer.cornerRadius = 5
-    goalLabel.layer.masksToBounds = true
     goalLabel.font = .boldSystemFont(ofSize: 14)
     goalLabel.textAlignment = .center
     goalLabel.adjustsFontSizeToFitWidth = true
@@ -135,8 +144,6 @@ private extension ProgressViewController {
   
   func setupTypeLabel() {
     typeLabel.textColor = .systemCyan
-    typeLabel.layer.cornerRadius = 5
-    typeLabel.layer.masksToBounds = true
     typeLabel.font = .boldSystemFont(ofSize: 14)
     typeLabel.textAlignment = .center
     typeLabel.adjustsFontSizeToFitWidth = true
@@ -151,8 +158,6 @@ private extension ProgressViewController {
   
   func setupTrophyLabel() {
     trophyLabel.textColor = .systemCyan
-    trophyLabel.layer.cornerRadius = 5
-    trophyLabel.layer.masksToBounds = true
     trophyLabel.font = .boldSystemFont(ofSize: 14)
     trophyLabel.textAlignment = .center
     trophyLabel.adjustsFontSizeToFitWidth = true
@@ -167,8 +172,6 @@ private extension ProgressViewController {
   
   func setupPointsLabel() {
     pointsLabel.textColor = .systemCyan
-    pointsLabel.layer.cornerRadius = 5
-    pointsLabel.layer.masksToBounds = true
     pointsLabel.font = .boldSystemFont(ofSize: 14)
     pointsLabel.textAlignment = .center
     pointsLabel.adjustsFontSizeToFitWidth = true
@@ -181,8 +184,30 @@ private extension ProgressViewController {
     ])
   }
   
-  func setupHealthKitUI() {
-    
+  func setupStepsImageView() {
+    stepsImageView.image = UIImage(systemName: "figure.walk")
+    stepsImageView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(stepsImageView)
+    NSLayoutConstraint.activate([
+      stepsImageView.topAnchor.constraint(equalTo: pointsLabel.bottomAnchor, constant: 24),
+      stepsImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+      stepsImageView.heightAnchor.constraint(equalToConstant: 24),
+      stepsImageView.widthAnchor.constraint(equalToConstant: 24),
+    ])
+  }
+  
+  func setupStepsLabel() {
+    stepsLabel.textColor = .systemCyan
+    stepsLabel.font = .boldSystemFont(ofSize: 14)
+    stepsLabel.textAlignment = .left
+    stepsLabel.adjustsFontSizeToFitWidth = true
+    stepsLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(stepsLabel)
+    NSLayoutConstraint.activate([
+      stepsLabel.centerYAnchor.constraint(equalTo: stepsImageView.centerYAnchor),
+      stepsLabel.leadingAnchor.constraint(equalTo: stepsImageView.trailingAnchor, constant: 12),
+      stepsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+    ])
   }
   
   func showActivityIndicator(_ show: Bool = true) {

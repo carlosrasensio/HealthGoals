@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HealthKit
 
 protocol ProgressPresenterProtocol {
   var navigationItemTitle: String { get }
@@ -15,12 +16,19 @@ protocol ProgressPresenterProtocol {
   var type: String { get }
   var trophy: String { get }
   var points: String { get }
+  var steps: String { get }
+  
+  func getTodaySteps()
 }
 
 final class ProgressPresenter {
   // MARK: Variables
   private let coreDataManager: CoreDataManagerProtocol
-  var goalProgress: Goal?
+  private var goalProgress: Goal?
+  private let healthStore = HKHealthStore()
+  private var observerQuery: HKObserverQuery?
+  private var mySteps = "0"
+  private var query: HKStatisticsQuery?
   
   // MARK: Initializer
   init(goal: Goal? = nil, coreDataManager: CoreDataManagerProtocol) {
@@ -71,5 +79,63 @@ extension ProgressPresenter: ProgressPresenterProtocol {
   var points: String {
     guard let goalProgress else { return "-" }
     return "Points: \(goalProgress.reward.points)"
+  }
+  
+  var steps: String {
+    return "Steps: \(mySteps)"
+  }
+  
+  func getTodaySteps() {
+    guard let stepCountType = HKObjectType.quantityType(forIdentifier: .stepCount) else {
+      print("\n❌ ERROR: identifier .stepCount")
+      return
+    }
+    
+    observerQuery = HKObserverQuery(sampleType: stepCountType, predicate: nil, updateHandler: { [weak self] _, _, error in
+      guard let self else { return }
+      
+      if let error {
+        print("\n❌ ERROR: \(error.localizedDescription)")
+      }
+      
+      self.getMySteps()
+    })
+    
+    observerQuery.map(healthStore.execute)
+  }
+}
+
+// MARK: - Private methods
+
+private extension ProgressPresenter {
+  func getMySteps() {
+    let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+    let now = Date()
+    let startOfDay = Calendar.current.startOfDay(for: now)
+    let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        
+    query = HKStatisticsQuery(
+      quantityType: stepsQuantityType,
+      quantitySamplePredicate: predicate,
+      options: .cumulativeSum,
+      completionHandler: { _, result, error in
+      if let error {
+        print("\n❌ ERROR: \(error.localizedDescription)")
+      }
+      
+      guard let result, let sum = result.sumQuantity() else {
+        DispatchQueue.main.async {
+          self.mySteps = String(Int(0))
+        }
+        
+        return
+      }
+      
+      DispatchQueue.main.async {
+        self.mySteps = String(Int(sum.doubleValue(for: HKUnit.count())))
+      }
+    })
+    
+    query.map(healthStore.execute)
   }
 }
