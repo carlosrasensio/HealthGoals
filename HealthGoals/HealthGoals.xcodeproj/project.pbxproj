@@ -22,7 +22,10 @@
 		7007FEB1299F37E000A1FF84 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7007FEB0299F37E000A1FF84 /* CoreDataManager.swift */; };
 		709B4CA129A52F3900846E9F /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CA029A52F3900846E9F /* Progress.swift */; };
 		709B4CAA29A57CA400846E9F /* HealthGoals.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CA829A57CA400846E9F /* HealthGoals.xcdatamodeld */; };
-		709B4CB229A59AC200846E9F /* HealthGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CB129A59AC200846E9F /* HealthGoalsTests.swift */; };
+		709B4CB929A59B6800846E9F /* MockGoals.json in Resources */ = {isa = PBXBuildFile; fileRef = 709B4CB829A59B6800846E9F /* MockGoals.json */; };
+		709B4CC529A59C9300846E9F /* GoalsPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CC429A59C9300846E9F /* GoalsPresenterTest.swift */; };
+		709B4CC729A59C9E00846E9F /* ProgressPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CC629A59C9E00846E9F /* ProgressPresenterTest.swift */; };
+		709B4CCB29A59CFF00846E9F /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CCA29A59CFF00846E9F /* NetworkManagerTest.swift */; };
 		70F7944F299FDDD400CF0956 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F7944E299FDDD400CF0956 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +58,10 @@
 		709B4CA029A52F3900846E9F /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		709B4CA929A57CA400846E9F /* HealthGoals.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthGoals.xcdatamodel; sourceTree = "<group>"; };
 		709B4CAF29A59AC200846E9F /* HealthGoalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HealthGoalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		709B4CB129A59AC200846E9F /* HealthGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthGoalsTests.swift; sourceTree = "<group>"; };
+		709B4CB829A59B6800846E9F /* MockGoals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MockGoals.json; sourceTree = "<group>"; };
+		709B4CC429A59C9300846E9F /* GoalsPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPresenterTest.swift; sourceTree = "<group>"; };
+		709B4CC629A59C9E00846E9F /* ProgressPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenterTest.swift; sourceTree = "<group>"; };
+		709B4CCA29A59CFF00846E9F /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		70F7944E299FDDD400CF0956 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		70F7945129A3DF6700CF0956 /* HealthGoals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthGoals.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,9 +242,76 @@
 		709B4CB029A59AC200846E9F /* HealthGoalsTests */ = {
 			isa = PBXGroup;
 			children = (
-				709B4CB129A59AC200846E9F /* HealthGoalsTests.swift */,
+				709B4CCC29A59D2700846E9F /* HealthGoals */,
+				709B4CBA29A59B8C00846E9F /* Mocks */,
 			);
 			path = HealthGoalsTests;
+			sourceTree = "<group>";
+		};
+		709B4CBA29A59B8C00846E9F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CB829A59B6800846E9F /* MockGoals.json */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		709B4CC029A59C6600846E9F /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC129A59C6E00846E9F /* Presenter */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
+		709B4CC129A59C6E00846E9F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC429A59C9300846E9F /* GoalsPresenterTest.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		709B4CC229A59C7400846E9F /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC329A59C7A00846E9F /* Presenter */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		709B4CC329A59C7A00846E9F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC629A59C9E00846E9F /* ProgressPresenterTest.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		709B4CC829A59CE800846E9F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC929A59CEE00846E9F /* Network */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		709B4CC929A59CEE00846E9F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CCA29A59CFF00846E9F /* NetworkManagerTest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		709B4CCC29A59D2700846E9F /* HealthGoals */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CC029A59C6600846E9F /* Goals */,
+				709B4CC229A59C7400846E9F /* Progress */,
+				709B4CC829A59CE800846E9F /* Utils */,
+			);
+			path = HealthGoals;
 			sourceTree = "<group>";
 		};
 		70F79450299FDDD900CF0956 /* Coordinator */ = {
@@ -302,6 +375,7 @@
 					};
 					709B4CAE29A59AC200846E9F = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = 7007FE72299F036C00A1FF84;
 					};
 				};
@@ -339,6 +413,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				709B4CB929A59B6800846E9F /* MockGoals.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +445,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				709B4CB229A59AC200846E9F /* HealthGoalsTests.swift in Sources */,
+				709B4CCB29A59CFF00846E9F /* NetworkManagerTest.swift in Sources */,
+				709B4CC529A59C9300846E9F /* GoalsPresenterTest.swift in Sources */,
+				709B4CC729A59C9E00846E9F /* ProgressPresenterTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,14 +653,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UTN2YWBKP2;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.carlosrasensio.HealthGoalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HealthGoals.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HealthGoals";
@@ -594,10 +678,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = UTN2YWBKP2;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.carlosrasensio.HealthGoalsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
