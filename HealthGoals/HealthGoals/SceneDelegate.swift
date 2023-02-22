@@ -28,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func sceneDidEnterBackground(_ scene: UIScene) {
     coreDataManager = CoreDataManager()
     coreDataManager!.saveContext()
-  }}
+  }
+}
 
 // MARK: - Navigation bar configuration
 
