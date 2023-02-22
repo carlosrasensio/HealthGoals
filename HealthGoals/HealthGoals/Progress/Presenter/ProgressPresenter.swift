@@ -22,6 +22,7 @@ protocol ProgressPresenterProtocol {
   var trophy: String { get }
   var points: String { get }
   var movement: String { get }
+  var percentage: String { get }
   
   func setViewDelegate(delegate: ProgressPresenterDelegate)
   func saveProgress(_ progress: Progress)
@@ -37,6 +38,7 @@ final class ProgressPresenter {
   private var observerQuery: HKObserverQuery?
   private var query: HKStatisticsQuery?
   private var myDailyMovement: Movement?
+  private var movementProgress = "0"
   
   // MARK: Initializer
   init(goal: Goal? = nil, coreDataManager: CoreDataManagerProtocol) {
@@ -94,6 +96,21 @@ extension ProgressPresenter: ProgressPresenterProtocol {
     return "Movement: \(myDailyMovement.distance) \(myDailyMovement.type.rawValue)"
   }
   
+  var percentage: String {
+    guard let goalProgress else { return "-" }
+    let goal = Double(goalProgress.goal)
+    var progress = 0.0
+    
+    switch goalProgress.type {
+      case .step: progress = Double(movementProgress)!
+      default: progress = Double(movementProgress)! * 1000
+    }
+    
+    let percentage = (progress / goal!) * 100
+    
+    return "\(percentage)％"
+  }
+  
   public func setViewDelegate(delegate: ProgressPresenterDelegate) {
     self.delegate = delegate
   }
@@ -144,6 +161,7 @@ private extension ProgressPresenter {
         else { return }
         
         let progress = Progress(goalId: goalProgress.id, movement: myDailyMovement)
+        self.movementProgress = myDailyMovement.distance
         delegate.presentProgress(progress)
       }
     }
@@ -185,6 +203,7 @@ private extension ProgressPresenter {
         else { return }
         
         let progress = Progress(goalId: goalProgress.id, movement: myDailyMovement)
+        self.movementProgress = myDailyMovement.distance
         delegate.presentProgress(progress)
       }
     }

@@ -26,6 +26,7 @@ final class ProgressViewController: UIViewController {
   private lazy var pointsLabel = UILabel()
   private lazy var stepsImageView = UIImageView()
   private lazy var movementLabel = UILabel()
+  private lazy var goalProgressLabel = UILabel()
   
   // MARK: Variables
   private let presenter: ProgressPresenterProtocol
@@ -66,6 +67,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
   func setupHealthKitUI() {
     setupStepsImageView()
     setupMovementLabel()
+    setupGoalProgressLabel()
   }
   
   func setupInfo() {
@@ -81,6 +83,7 @@ extension ProgressViewController: ProgressViewControllerProtocol {
   
   func setupHealthKitInfo() {
     movementLabel.text = presenter.movement
+    goalProgressLabel.text = presenter.percentage
   }
 }
 
@@ -190,8 +193,8 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       stepsImageView.topAnchor.constraint(equalTo: pointsLabel.bottomAnchor, constant: 48),
       stepsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      stepsImageView.heightAnchor.constraint(equalToConstant: 80),
-      stepsImageView.widthAnchor.constraint(equalToConstant: 80)
+      stepsImageView.heightAnchor.constraint(equalToConstant: 100),
+      stepsImageView.widthAnchor.constraint(equalToConstant: 100)
     ])
   }
   
@@ -205,7 +208,26 @@ private extension ProgressViewController {
     NSLayoutConstraint.activate([
       movementLabel.topAnchor.constraint(equalTo: stepsImageView.bottomAnchor, constant: 12),
       movementLabel.centerXAnchor.constraint(equalTo: stepsImageView.centerXAnchor)
-
+    ])
+  }
+  
+  func setupGoalProgressLabel() {
+    let heightAndWidth = 120.0
+    goalProgressLabel.layer.borderColor = UIColor.systemCyan.cgColor
+    goalProgressLabel.layer.borderWidth = 3
+    goalProgressLabel.layer.cornerRadius = heightAndWidth / 2.0
+    goalProgressLabel.textColor = .systemCyan
+    goalProgressLabel.font = .boldSystemFont(ofSize: 24)
+    goalProgressLabel.textAlignment = .center
+    goalProgressLabel.adjustsFontSizeToFitWidth = true
+    goalProgressLabel.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(goalProgressLabel)
+    NSLayoutConstraint.activate([
+      goalProgressLabel.topAnchor.constraint(equalTo: movementLabel.bottomAnchor, constant: 48),
+      goalProgressLabel.centerXAnchor.constraint(equalTo: movementLabel.centerXAnchor),
+      goalProgressLabel.heightAnchor.constraint(equalToConstant: heightAndWidth),
+      goalProgressLabel.widthAnchor.constraint(equalToConstant: heightAndWidth)
+      
     ])
   }
   
