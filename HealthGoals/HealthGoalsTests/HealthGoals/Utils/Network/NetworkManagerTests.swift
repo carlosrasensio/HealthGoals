@@ -13,8 +13,8 @@ final class NetworkManagerTests: XCTestCase {
   var sut: NetworkManagerProtocol?
   private let jsonName = "MockGoals"
   private let jsonExtension = ".json"
-  var goals: [Goal]?
-  var mockGoals: [Goal]?
+  private var goals: [Goal]?
+  private var mockGoals: [Goal]?
   
   // MARK: Configuration
   override func setUpWithError() throws {

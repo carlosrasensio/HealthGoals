@@ -122,7 +122,7 @@ extension ProgressPresenter: ProgressPresenterProtocol {
   func getHealthInfo() {
     guard let goalProgress else { return }
     switch goalProgress.type {
-    case .step: getDailySteps()
+      case .step: getDailySteps()
       default: getDistanceWalkingRunning()
     }
   }
