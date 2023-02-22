@@ -26,6 +26,7 @@
 		709B4CC529A59C9300846E9F /* GoalsPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CC429A59C9300846E9F /* GoalsPresenterTest.swift */; };
 		709B4CC729A59C9E00846E9F /* ProgressPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CC629A59C9E00846E9F /* ProgressPresenterTest.swift */; };
 		709B4CCB29A59CFF00846E9F /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CCA29A59CFF00846E9F /* NetworkManagerTest.swift */; };
+		709B4CCF29A5A5A500846E9F /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709B4CCE29A5A5A500846E9F /* Bundle+.swift */; };
 		70F7944F299FDDD400CF0956 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F7944E299FDDD400CF0956 /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		709B4CC429A59C9300846E9F /* GoalsPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPresenterTest.swift; sourceTree = "<group>"; };
 		709B4CC629A59C9E00846E9F /* ProgressPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressPresenterTest.swift; sourceTree = "<group>"; };
 		709B4CCA29A59CFF00846E9F /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		709B4CCE29A5A5A500846E9F /* Bundle+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		70F7944E299FDDD400CF0956 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		70F7945129A3DF6700CF0956 /* HealthGoals.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HealthGoals.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,7 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				709B4CCC29A59D2700846E9F /* HealthGoals */,
-				709B4CBA29A59B8C00846E9F /* Mocks */,
+				709B4CCD29A5A58500846E9F /* Helpers */,
 			);
 			path = HealthGoalsTests;
 			sourceTree = "<group>";
@@ -312,6 +314,23 @@
 				709B4CC829A59CE800846E9F /* Utils */,
 			);
 			path = HealthGoals;
+			sourceTree = "<group>";
+		};
+		709B4CCD29A5A58500846E9F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CD029A5A5C200846E9F /* Extensions */,
+				709B4CBA29A59B8C00846E9F /* Mocks */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		709B4CD029A5A5C200846E9F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				709B4CCE29A5A5A500846E9F /* Bundle+.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		70F79450299FDDD900CF0956 /* Coordinator */ = {
@@ -446,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				709B4CCB29A59CFF00846E9F /* NetworkManagerTest.swift in Sources */,
+				709B4CCF29A5A5A500846E9F /* Bundle+.swift in Sources */,
 				709B4CC529A59C9300846E9F /* GoalsPresenterTest.swift in Sources */,
 				709B4CC729A59C9E00846E9F /* ProgressPresenterTest.swift in Sources */,
 			);

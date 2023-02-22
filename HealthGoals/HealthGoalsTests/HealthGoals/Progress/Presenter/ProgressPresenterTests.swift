@@ -1,5 +1,5 @@
 //
-//  GoalsPresenterTest.swift
+//  ProgressPresenterTests.swift
 //  HealthGoalsTests
 //
 //  Created by Carlos Rodriguez Asensio on 22/2/23.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import HealthGoals
 
-final class GoalsPresenterTest: XCTestCase {
+final class ProgressPresenterTests: XCTestCase {
   override func setUpWithError() throws {
     try super.setUpWithError()
   }
